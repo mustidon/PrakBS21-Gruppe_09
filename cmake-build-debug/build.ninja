@@ -55,6 +55,18 @@ build CMakeFiles/BS2025.dir/main.c.obj: C_COMPILER__BS2025_unscanned_Debug C$:/U
   OBJECT_DIR = CMakeFiles\BS2025.dir
   OBJECT_FILE_DIR = CMakeFiles\BS2025.dir
 
+build CMakeFiles/BS2025.dir/keyValStore.c.obj: C_COMPILER__BS2025_unscanned_Debug C$:/Users/Mustafa/CLionProjects/BS2025/keyValStore.c || cmake_object_order_depends_target_BS2025
+  DEP_FILE = CMakeFiles\BS2025.dir\keyValStore.c.obj.d
+  FLAGS = -g -std=gnu99 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\BS2025.dir
+  OBJECT_FILE_DIR = CMakeFiles\BS2025.dir
+
+build CMakeFiles/BS2025.dir/sub.c.obj: C_COMPILER__BS2025_unscanned_Debug C$:/Users/Mustafa/CLionProjects/BS2025/sub.c || cmake_object_order_depends_target_BS2025
+  DEP_FILE = CMakeFiles\BS2025.dir\sub.c.obj.d
+  FLAGS = -g -std=gnu99 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\BS2025.dir
+  OBJECT_FILE_DIR = CMakeFiles\BS2025.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target BS2025
@@ -63,7 +75,7 @@ build CMakeFiles/BS2025.dir/main.c.obj: C_COMPILER__BS2025_unscanned_Debug C$:/U
 #############################################
 # Link the executable BS2025.exe
 
-build BS2025.exe: C_EXECUTABLE_LINKER__BS2025_Debug CMakeFiles/BS2025.dir/main.c.obj
+build BS2025.exe: C_EXECUTABLE_LINKER__BS2025_Debug CMakeFiles/BS2025.dir/main.c.obj CMakeFiles/BS2025.dir/keyValStore.c.obj CMakeFiles/BS2025.dir/sub.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\BS2025.dir
