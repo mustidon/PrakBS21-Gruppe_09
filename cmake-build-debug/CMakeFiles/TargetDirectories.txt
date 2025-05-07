@@ -1,0 +1,3 @@
+C:/Users/Mustafa/CLionProjects/BS2025/cmake-build-debug/CMakeFiles/BS2025.dir
+C:/Users/Mustafa/CLionProjects/BS2025/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Mustafa/CLionProjects/BS2025/cmake-build-debug/CMakeFiles/rebuild_cache.dir

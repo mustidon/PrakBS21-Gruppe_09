@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/BS2025.dir/main.c.o  -o BS2025 
