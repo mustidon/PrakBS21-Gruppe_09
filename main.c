@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -17,7 +18,7 @@
 #define BUFSIZE 1024 // Größe des Buffers
 #define TRUE 1
 #define ENDLOSSCHLEIFE 1
-#define PORT 4711
+#define PORT 5678
 
 
 int main() {
@@ -65,21 +66,68 @@ int main() {
 
   while (ENDLOSSCHLEIFE) {
 
+    char keys[20][20];
+    char values[20][20];
+
+
     // Verbindung eines Clients wird entgegengenommen
-    cfd = accept(rfd, (struct sockaddr *) &client, &client_len);
+    cfd = accept(rfd, (struct sockaddr *) 0, 0);
 
-    // Lesen von Daten, die der Client schickt
-    bytes_read = read(cfd, in, BUFSIZE);
+    int pid = fork();
 
-    // Zurückschicken der Daten, solange der Client welche schickt (und kein Fehler passiert)
-    while (bytes_read > 0) {
-      printf("sending back the %d bytes I received...\n", bytes_read);
+    if (pid==0) {
+      close(rfd);
+      printf("test");
 
-      write(cfd, in, bytes_read);
+      // Lesen von Daten, die der Client schickt
       bytes_read = read(cfd, in, BUFSIZE);
 
+      // Zurückschicken der Daten, solange der Client welche schickt (und kein Fehler passiert)
+      while (bytes_read > 0) {
+        printf("sending back the %d bytes I received...\n", bytes_read);
+        char command[16], key[20], value[20];                                        //command key und value platzhalter für eingabe
+        int n = sscanf(in, "%15s %19s %19[^\n]", command, key, value);  //teilt das gelesen in command, key und value auf
+
+        if (strcmp(command, "put" )==0) {
+          for (int i =0; i<20;i++) {
+            if (strcmp(keys[i], key)==0 || keys[i][0]=='\0') {
+              for (int j = 0; j<20; j++) {
+                keys[i][j]=key[j];
+                values[i][j]=value[j];
+              }
+              break;
+            }
+          }
+
+        }
+        if (strcmp(command, "get")==0) {
+          for (int i =0; i<20;i++) {
+            if (strcmp(keys[i], key)==0) {
+              snprintf(in, BUFSIZE, "%s:%s\n", key, values[i]);
+              write(cfd, in, strlen(in));
+              break;
+            }
+          }
+        }
+        if (strcmp(command, "del")==0){
+            for (int i =0; i<20;i++) {
+              if (strcmp(keys[i], key)==0) {
+                strcpy(keys[i], "");
+                break;
+              }
+            }
+        }
+        if (strcmp(command, "quit")==0) exit(0);
+
+        bytes_read = read(cfd, in, BUFSIZE);
+
+      }
+      printf("oh nein");
+      close(cfd);
+      exit(0);
     }
-    close(cfd);
+    if (pid>0) close(cfd);
+
   }
 
   // Rendevouz Descriptor schließen
