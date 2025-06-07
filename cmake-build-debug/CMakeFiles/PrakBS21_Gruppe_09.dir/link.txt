@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/PrakBS21_Gruppe_09.dir/main.c.o CMakeFiles/PrakBS21_Gruppe_09.dir/KeyValueStore.c.o CMakeFiles/PrakBS21_Gruppe_09.dir/sub.c.o  -o PrakBS21_Gruppe_09 
